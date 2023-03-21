@@ -20,3 +20,8 @@
 
 [文章联机](https://github.com/ShawnZL/Reinforcement/blob/master/Q_Learning/Q_Learning.md)
 
+# 20230321 Sarsa & Sarsa lambda
+
+理解Sarsa的概念，完成对于编写完成Sarsa的代码，**体会Q_learning中Q值跟新和Sarsa的不同**
+
+[文章链接](https://blog.csdn.net/zuzhiang/article/details/103180841)

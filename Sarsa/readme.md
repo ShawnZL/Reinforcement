@@ -12,9 +12,9 @@ Sarsa 算法是on-policy学习算法，它只有一个策略，使用贪婪选�
 
 ## Sarsa算法流程
 
+
+
 ![](https://github.com/ShawnZL/Reinforcement/raw/master/picture/Sarsa_pic1.png)
-
-
 
 初始化 Q 表（令其值为 0）
 
@@ -33,6 +33,42 @@ Sarsa 算法是on-policy学习算法，它只有一个策略，使用贪婪选�
  （3）更新 Q 表：Q ( s , a ) ← Q ( s , a ) + α [ r + γ ⋅ Q ( s ′ , a ′ ) − Q ( s , a ) ] 
 
  （4）更新状态和动作：s=s’， a=a’
+
+```python
+# Sarsa
+def rl():
+    q_table = build_q_table(N_STATES, ACTIONS)
+    for episode in range(MAX_EPISODES):
+        step_couter = 0
+        S = 0
+        is_terminated = False
+        update_env(S, episode, step_couter)
+        A = choose_action(S, q_table) # 首先根据随机动作选择一个动作
+        # A 代表下一个行为，一定要先放置在外边
+        while not is_terminated:
+            S_, R = get_env_feedback(S, A) # 下一个的动作，奖励
+            q_predict = q_table.loc[S, A]
+            if S_ != 'terminal':
+                A_ = choose_action(S_, q_table)
+                q_target = R + GAMMA * q_table.loc[S_, A_]
+                # 注意Q_learning 选择的方法是选择最大值
+                # 但是Sarsa选择的是还是贪婪算法选择行为
+                """
+                q_target = R + GAMMA * q_table.iloc[S_,:].max()
+                """
+            else:
+                q_target = R
+                is_terminated = True
+            q_table.loc[S, A] += ALPHA * (q_target - q_predict)
+
+            S = S_
+            A = A_
+            update_env(S, episode, step_couter + 1)
+            step_couter += 1
+    return q_table
+
+```
+
 
 
 # Sarsa-lambda
