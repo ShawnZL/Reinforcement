@@ -78,11 +78,17 @@ def rl():
                 E_table.iloc[S,:] = 0
                 E_table.loc[S, A] = 1
                 # 对于矩阵E_table的遍历
+                """
+                # for 循环
                 for i in range(N_STATES):
                     for As in ACTIONS:
                         if (E_table.loc[i, As]) != 0:
                             q_table.loc[i, As] += ALPHA * delta * E_table.loc[i, As]
                             E_table.loc[i, As] = GAMMA * LAMBDA * E_table.loc[i, As]
+                """
+                # 直接使用矩阵乘法，优化结构
+                q_table += ALPHA * delta * E_table
+                E_table = GAMMA * LAMBDA * E_table
             else:
                 q_target = R
                 is_terminated = True
@@ -92,7 +98,7 @@ def rl():
             A = A_
             update_env(S, episode, step_counter + 1)
             step_counter += 1
-            print(E_table)
+            # print(E_table)
     return q_table
 
 
