@@ -5,7 +5,11 @@ from DDPG import DDPG
 from utils import create_directory, plot_learning_curve, scale_action
 
 parser = argparse.ArgumentParser("DDPG parameters")
+<<<<<<< HEAD
 parser.add_argument('--max_episodes', type=int, default=1000)
+=======
+parser.add_argument('--max_episodes', type=int, default=100)
+>>>>>>> f1302c7 (🚀🏆)
 parser.add_argument('--checkpoint_dir', type=str, default='./checkpoints/DDPG/')
 parser.add_argument('--figure_file', type=str, default='./output_images/reward.png')
 

@@ -65,7 +65,14 @@ class ActorCritic:
         # 根据代码中的 gather(1, actions)，第二个参数 actions 是一个大小为 [batch_size, 1] 的张量，包含了要选择的动作的索引。
         # 而第一个参数的维度 1 表示要在第 1 维上进行索引操作，也就是在每个样本的概率分布中选择对应的动作概率。
         # [batch_size, num_actions] [批量大小,动作的数量]
+<<<<<<< HEAD
         # print(actions) 这里是记录我们所选择的动作，然后使用gather进行一种索引操作
+=======
+        # print(states, actions) # 这里是记录我们所选择的动作，然后使用gather进行一种索引操作
+
+        # 使用gather函数从概率分布中根据actions索引提取对应的概率值。actions是一个张量，其形状为(batch_size, 1)，
+        # 表示每个样本选择的动作的索引。gather函数的作用是根据索引从概率分布中取出对应的概率值，形成一个新的张量。
+>>>>>>> f1302c7 (🚀🏆)
         log_probs = torch.log(self.actor(states).gather(1, actions))
         # print(log_probs)
         actor_loss = torch.mean(-log_probs * td_delta.detach())
